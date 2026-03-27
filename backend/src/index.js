@@ -4,12 +4,13 @@ const {createServer} = require("node:http");
 const {Server} = require("socket.io");
 const mongoose = require("mongoose");
 const cors = require("cors");
+const connectToSocket = require("./services/socketConnection")
 
 const port = process.env.PORT || 8000;
 const MONGO_URL = process.env.MONGO_URL;
 const app = express();
 const server = createServer(app);
-const io = new Server(server);
+const io = connectToSocket(server);
 
 app.use(cors());
 app.use(express.json());
